@@ -17,6 +17,7 @@ def create_app():
     app.register_blueprint(destinations.destbp)
 
     return app
+
 @app.route('/')
 def index():
     return render_template('index.html')

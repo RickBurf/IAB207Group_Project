@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content%}
+<div class="Events_4U1">
+    <div class="col-md-12">
+        <h1>Create Event</h1>
+    </div>
+</div> 
+
+<form>
+    <div class="Imageless_Event_Container">
+        <div class="Create_Event_Container">
+            <div class="Upload_Event_Container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <input type="file" id="Event_Image" accept="image/*">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Event_Name" class="mb-0">Event Name:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id= "Event_Name" placeholder=" Enter Event Name ">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Description"  class="mb-0">Description:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id= "Event_Description" placeholder="Enter Event Description">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Event_Date"  class="mb-0">Date:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="date" class="form-control" id= "Event_Date" placeholder="Enter Event Date">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Start-Time"  class="mb-0">Start Time:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="time" class="form-control" id= "Start-Time" placeholder="Enter Start Time">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="End-Time"  class="mb-0">End Time:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="time" class="form-control" id="End-Time" placeholder="Enter End Time">
+                </div>
+            </div>
+        </div>
+        
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Venue_Name"  class="mb-0">Venue Name:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id= "Venue_Name" placeholder=" Enter Venue Name ">
+                </div>
+            </div>
+        </div>
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Venue_Address"  class="mb-0">Venue Address:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id= "Venue_Address" placeholder=" Enter Venue Address ">
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+
+
+        <div class="Create_Event_Container">
+            <div class="row">
+                <div class="col-md-4">
+                        <p class="mb-0">Sports Type:</p>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control" id="sport_type" name="event_type">
+                        <option value="concert">Choose Sports Type</option>
+                        <option value="concert">Aussie Rules</option>
+                        <option value="conference">Rugby League</option>
+                        <option value="festival">Touch Football</option>
+                        <option value="workshop">Soccer</option>
+                        <option value="festival">Basketball</option>
+                        <option value="workshop">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                </div>
+                <div class="col-md-2">
+                    <div class="Special_Button">
+                        <a href="EventsPage.html">
+                            <button class="Create_Event_Button"> Create Event</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+{% endblock %}

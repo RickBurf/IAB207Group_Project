@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content%}
+    <div class="container">
+        <div class="slideshow-container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="mySlides">
+                <a href="EventsPage.html">
+                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx302461.jpg" style="width:100%" alt="Slideshow AFL FINALS">
+            </a>
+            </div>
+            <div class="mySlides">
+                <a href="EventsPage.html">
+                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx300800.jpg" style="width:100%" alt="Slideshow NRL FINALS">
+                </a>
+            </div>
+            <div class="mySlides">
+                <a href="EventsPage.html">
+                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx295358.jpg" style="width:100%" alt="Slideshow NHL Exhibition">
+                </a>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <br>
+
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+    </script>
+    </div>
+
+<div class="Events_For_You">
+    <div class="col-md-12">
+        <h1> Events For You</h1>
+    </div>
+</div>
+
+
+<div class="image-row">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://i.guim.co.uk/img/media/35604d70ee54c98a176656bdeda585f275cf8000/0_115_3679_2208/master/3679.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d31232e48a8769a3606b54174b0ffe01" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Boomers vs Finland</h3>
+              <p class="event-description-HOME">Get ready for heart-pounding basketball action as the Boomers take on Finland in a thrilling clash on the court. Witness incredible slam dunks, three-pointers, and fierce competition that will keep you on the edge of your seat. Don't miss this epic showdown between two basketball powerhouses. Markannen vs Mills in a battle of the ages.</p>
+              <p class="event-date-HOME">2:30AM September 7</p>
+              <div class="status-box-Soldout">
+                Sold Out
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://imageio.forbes.com/specials-images/imageserve/6301107ace22ca7251b74236/nfl2022-1x1/0x0.jpg?format=jpg&height=1080&width=1080" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Sunday Night Football</h3>
+              <p class="event-description-HOME">It's a Sunday Night Football extravaganza! Under the dazzling lights, prepare for an unforgettable evening of gridiron magic. From electrifying touchdowns to bone-crushing tackles, this game promises football at its finest. Gather your friends and family for an evening of sports excitement that will have you cheering for your favorite team.</p>
+              <p class="event-date-HOME">8:00PM September 9</p>
+              <div class="status-box-active">
+                Active
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://images.genius.com/9c1df9a1c6c203a5f99dbd4b02d88759.1000x1000x1.png" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">NBA Draft</h3>
+              <p class="event-description-HOME">The future of basketball unfolds at the NBA Draft! As young talents step into the spotlight, watch their dreams come true. This event is where legends are born, and the next basketball sensation could be on the stage. Join us to witness history in the making and celebrate the bright future of the NBA. Jaren Jackson Jr. and Mike Conley headline the night.</p>
+              <p class="event-date-HOME">1:30PM September 10</p>
+              <div class="status-box-Soldout">
+                Sold Out
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="Events_For_You">
+    <div class="col-md-12">
+        <h1> Upcoming Events</h1>
+    </div>
+</div>
+
+
+<div class="image-row">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://justcalendars.com.au/cdn/shop/files/7a41e4c60c937531f85f1c6692d058d1_grande.jpg?v=1688715240" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">AFLW: Essendon vs Brisbane</h3>
+              <p class="event-description-HOME"> The AFLW action heats up as Essendon clashes with Brisbane in a fierce showdown. These athletes bring their A-game, showcasing skill, strength, and unwavering determination. It's more than a game; it's a battle of champions. Prepare for a thrilling match filled with high-flying marks. One of those once in a generation events.</p>
+              <p class="event-date-HOME">2:30PM September 11</p>
+              <div class="status-box-Cancelled">
+                Cancelled
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://i.guim.co.uk/img/media/471c804984cf42fa6b829686fa884989a052c585/0_0_5346_3208/master/5346.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d1ba52a30c3a8f9f496a237402ce36e0" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Rugby World Cup</h3>
+              <p class="event-description-HOME">Brace yourself for the Rugby World, where nations collide in this ultimate test of strength and strategy. From scrums to lineouts, every moment is a battle on the field. Feel the adrenaline rush as teams fight for supremacy, and rugby's heart-pounding excitement takes center stage. Be part of this global celebration of the sport.</p>
+              <p class="event-date-HOME">4:30AM September 17</p>
+              <div class="status-box-Soldout">
+                Sold Out
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://www.si.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk3MzM3NzQ3OTYxMTYwOTAz/shaq.jpg" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">SHAQ Talkshow Tour</h3>
+              <p class="event-description-HOME">Join the legendary Shaquille O'Neal on his world tour, bringing the magic of basketball to your city. Experience thrilling slam dunks, incredible skills, and Shaq's larger-than-life personality. It's a once-in-a-lifetime opportunity to witness basketball greatness up close and personal. Shaq will bring the laughs and tears all for you on a one night exclusive.</p>
+              <p class="event-date-HOME">2:30PM September 23</p>
+              <div class="status-box-active">
+                Active
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="Events_For_You">
+    <div class="col-md-12">
+        <h1> Soccer Events</h1>
+    </div>
+</div>
+
+
+
+<div class="image-row">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://i.guim.co.uk/img/media/e0dbf2b1063ae7a596249917f815f18c82fb0a2a/0_118_2500_1500/master/2500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=119c931f6105358c3c115c8fa384638b" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Australia vs Mexico</h3>
+              <p class="event-description-HOME">It's an international soccer showdown as the Socceroos face off against Mexico. Two teams, one pitch, and a battle for pride and glory. Expect breathtaking goals, pinpoint passes, and fierce competition that will have fans of both nations cheering their hearts out. This is soccer at its finest.</p>
+              <p class="event-date-HOME">2:30AM September 7</p>
+              <div class="status-box-active">
+                Active
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://i.guim.co.uk/img/media/870c69e274f5073395e8b3fa95081b5be58e306e/0_110_3303_1983/master/3303.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=379a15e68fa26c16da67b6d3f295018b" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Matildas vs Haiti</h3>
+              <p class="event-description-HOME">The fearless Matildas take on Haiti in a soccer clash that promises excitement and intensity. These women athletes bring their best to the field, showcasing their skills, teamwork, and determination. From stunning goals to incredible saves, it's a match you won't want to miss.</p>
+              <p class="event-date-HOME">8:00PM September 9</p>
+              <div class="status-box-active">
+                Active
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://cdn.theathletic.com/cdn-cgi/image/width=1200,height=1200,fit=cover/app/uploads/2023/09/02181031/Son-Tottenham-Burnley-goalscorers-scaled-e1693692677313.jpg" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">Tottenham vs Burnley</h3>
+              <p class="event-description-HOME">Premier League action comes alive as Tottenham goes head-to-head with Burnley. The pitch becomes a battleground of football strategy, talent, and rivalry. Experience the roar of the crowd, the thrill of goals, and the drama of the beautiful game as these two teams clash.</p>
+              <p class="event-date-HOME">1:30PM September 10</p>
+              <div class="status-box-Cancelled">
+                Cancelled
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="Events_For_You">
+    <div class="col-md-12">
+        <h1> Tennis Events</h1>
+    </div>
+</div>
+
+
+<div class="image-row">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://static.independent.co.uk/2023/07/12/20/GettyImages-1537324794.jpg?width=1200&height=1200&fit=crop" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">2023 Wimbledon</h3>
+              <p class="event-description-HOME">Wimbledon 2023, the pinnacle of tennis excellence, is here. Watch the world's top tennis players battle it out for Grand Slam glory on the iconic grass courts. From powerful serves to incredible rallies, every moment is a testament to skill and determination. Join us for a summer of tennis.</p>
+              <p class="event-date-HOME">11:30PM September 3</p>
+              <div class="status-box-Cancelled">
+                Cancelled
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://images.wsj.net/im-849518/?width=1278&size=1" alt="Image 2">
+            <div class="event-info">
+              <h3 class="event-title-HOME">2023 US Open</h3>
+              <p class="event-description-HOME">Get ready for the 2023 US OPEN, where Grand Slam tennis action unfolds. The world's best gather to compete for the ultimate prize. Each match is a chapter in tennis history, filled with passion, precision, and unforgettable moments. Be part of this legendary tournament.</p>
+              <p class="event-date-HOME">4:30AM September 9</p>
+              <div class="status-box-active">
+                Active
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-card-HOME">
+          <a href="EventsPage.html">
+            <img src="https://i.guim.co.uk/img/media/edbb7a91f11f9382de834b496c52702c33c90548/0_66_5000_3000/master/5000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=46843821a12ccb6ad2399327e00092e7" alt="US OPEN">
+            <div class="event-info">
+              <h3 class="event-title-HOME">2024 Australian Open</h3>
+              <p class="event-description-HOME">Experience the excitement of the 2024 Australian Open, where tennis stars from around the globe converge in Melbourne. The courts sizzle with intense rallies, incredible athleticism, and championship dreams. It's a journey through tennis excellence that you won't want to miss.</p>
+              <p class="event-date-HOME">2:30PM January 10</p>
+              <div class="status-box-Inactive">
+                Inactive
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

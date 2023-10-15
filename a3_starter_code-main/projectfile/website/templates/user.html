@@ -1,23 +1,19 @@
-{% extends 'base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% block body %}
+{% extends "base.html" %}
 
-<div class="page-header">
-    <h4>{{heading}}</h4>
-</div>
+{% from 'bootstrap5/form.html' import render_form %}
 
-<!-- Form rendering is simple and easy if using WTForms -->
-<!-- If you want more granular control, declare the form manually: -->
-<!-- <form action="/route" method="post"> -->
-<div class="col-md-6">
-    {{wtf.render_form(form)}}
-</div>
+{% block content %}
 
-<!-- When you have login form, then show the user a link to register -->
-{% if heading|lower =='login' %}
-<div class="col-md-4">
-    <p>New user? <a href="{{ url_for('register') }}">Click here to register</a>.</p>
+<div class="container-fluid">
+    <div class="page-header text-center py-4"> <!-- Added py-4 class for padding on top and bottom -->
+        <h4>{{ heading }}</h4>
+    </div>
+
+    <!-- Center the form using mx-auto -->
+    <div class="col-md-6 mx-auto"> 
+        {{ render_form(form) }}
+    </div>
+
 </div>
-{% endif %}
 
 {% endblock %}

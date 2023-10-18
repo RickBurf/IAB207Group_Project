@@ -53,20 +53,10 @@ def login():
         if error is None:
             #all good, set the login_user of flask_login to manage the user
             login_user(user)
-            nextp = request.args.get('next')  # this gives the URL from where the login page was accessed
-            print(nextp)
-            if nextp is None or not nextp.startswith('/'):
-                return redirect(url_for('index'))
-            return redirect(nextp)
+            return redirect(url_for('main.index'))
         else:
             flash(error)
     return render_template('user.html', form=login_form, heading='Login')
-
-@authbp.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
 
 @authbp.route('/logout')
 @login_required

@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template
+from . import db
+
 
 bp = Blueprint('main', __name__)
-
 
 @bp.route('/')
 def index():
@@ -18,9 +19,3 @@ def history():
 @bp.route('/sevents')
 def sevents():
     return render_template('SEVENTS.html')
-
-
-@bp.route('/search', methods=['GET', 'POST'])
-def search():
-    # Your search logic here
-    return render_template('index.html')

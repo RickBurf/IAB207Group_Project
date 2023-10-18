@@ -6,6 +6,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 
 def create_app():
+    
     app = Flask(__name__)
     app.debug = True
     app.secret_key = 'somesecretgoeshere'
@@ -23,6 +24,9 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
       return User.query.get(int(user_id))
+    
+    from . import events
+    app.register_blueprint(events.destbp)
 
     # Import and register your views module here
     from . import views

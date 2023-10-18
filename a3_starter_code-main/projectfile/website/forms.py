@@ -1,7 +1,10 @@
-
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField
+<<<<<<< HEAD
 from wtforms.validators import InputRequired, Length, Email, EqualTo
+=======
+from wtforms.validators import InputRequired, Email, EqualTo
+>>>>>>> 7633c11d1958848b3622133a65f2fd56c11e7f08
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
@@ -16,6 +19,7 @@ class EventForm(FlaskForm):
   currency = StringField('Currency', validators=[InputRequired()])
   submit = SubmitField("Create")
 
+#User login
 class LoginForm(FlaskForm):
     user_name = StringField("User Name", validators=[InputRequired('Enter user name')])
     password = PasswordField("Password", validators=[InputRequired('Enter user password')])

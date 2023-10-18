@@ -1,19 +1,31 @@
-from flask import Flask
-from flask_bootstrap import Bootstrap
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
+import datetime
 
-db = SQLAlchemy()
+
+db=SQLAlchemy()
+
 
 def create_app():
     
     app = Flask(__name__)
-    app.debug = True
-    app.secret_key = 'somesecretgoeshere'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydbname.sqlite'
-    db.init_app(app)
-    bootstrap = Bootstrap(app)
+    #we use this utility module to display forms quickly
+    Bootstrap5(app)
 
+    #this is a much safer way to store passwords
+    Bcrypt(app)
+
+    #a secret key for the session object
+    #(it would be better to use an environment variable here)
+    app.secret_key = 'somerandomvalue'
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///website.sqlite'
+    db.init_app(app)
+
+    
     #initialise the login manager
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -24,16 +36,31 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
       return User.query.get(int(user_id))
+<<<<<<< HEAD
     
     from . import events
     app.register_blueprint(events.destbp)
 
     # Import and register your views module here
+=======
+    #add Blueprints
+>>>>>>> 7633c11d1958848b3622133a65f2fd56c11e7f08
     from . import views
     app.register_blueprint(views.bp)
 
-    # Import and register the auth blueprint here
     from . import auth
     app.register_blueprint(auth.authbp)
+
+    @app.errorhandler(404) 
+    # inbuilt function which takes error as parameter 
+    def not_found(e): 
+      return render_template("404.html", error=e)
+
+    #this creates a dictionary of variables that are available
+    #to all html templates
+    @app.context_processor
+    def get_context():
+      year = datetime.datetime.today().year
+      return dict(year=year)
 
     return app

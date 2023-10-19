@@ -1,21 +1,20 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
+from .models import Event
 from . import db
 
+mainbp = Blueprint('main', __name__)
 
-bp = Blueprint('main', __name__)
-
-@bp.route('/')
+@mainbp.route('/')
 def index():
-    return render_template('index.html')
+    events = db.session.scalars(db.select(Event)).all()    
+    return render_template('index.html', events=events)
 
-@bp.route('/create')
-def create():
-    return render_template('create.html')
-
-@bp.route('/history')
-def history():
-    return render_template('history.html')
-
-@bp.route('/sevents')
-def sevents():
-    return render_template('SEVENTS.html')
+@mainbp.route('/search')
+def search():
+    if request.args['search'] and request.args['search'] != "":
+        print(request.args['search'])
+        query = "%" + request.args['search'] + "%"
+        events = db.session.scalars(db.select(Event)).where(Event.description.like(query))
+        return render_template('index.html', events=events)
+    else:
+        return redirect(url_for('main.index'))

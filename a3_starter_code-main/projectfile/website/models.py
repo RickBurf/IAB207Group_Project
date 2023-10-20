@@ -15,6 +15,7 @@ class Event(db.Model):
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
     sport = db.Column(db.String(80), nullable=False)
+    status = db.Column(db.String(80), nullable=False)
     comments = db.relationship('Comment', backref='event')
 
     def __repr__(self):

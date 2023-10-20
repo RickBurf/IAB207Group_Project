@@ -19,6 +19,7 @@ class EventForm(FlaskForm):
     Start_Time = TimeField('Start Time', validators=[InputRequired()])
     End_Time = TimeField('End Time', validators=[InputRequired()])
     Sport = StringField('Sport', validators=[InputRequired()])
+    Status = TextAreaField('Status', validators=[InputRequired()])
     submit = SubmitField("Create")
 
 #User login

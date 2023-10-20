@@ -35,7 +35,8 @@ def create():
             end_date=form.End_Date.data,
             start_time=form.Start_Time.data,
             end_time=form.End_Time.data,
-            sport=form.Sport.data
+            sport=form.Sport.data,
+            status=form.Status.data
         )
         # add the object to the db session
         db.session.add(event)

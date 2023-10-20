@@ -76,55 +76,25 @@
 
 
 <div class="image-row">
+  {% for event in events %}
     <div class="row">
       <div class="col-md-4">
         <div class="event-card-HOME">
           <a href="EventsPage.html">
-            <img src="https://i.guim.co.uk/img/media/35604d70ee54c98a176656bdeda585f275cf8000/0_115_3679_2208/master/3679.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d31232e48a8769a3606b54174b0ffe01" alt="Image 2">
+            <img src="{{event.image }}" alt="Image 2">
             <div class="event-info">
-              <h3 class="event-title-HOME">Boomers vs Finland</h3>
-              <p class="event-description-HOME">Get ready for heart-pounding basketball action as the Boomers take on Finland in a thrilling clash on the court. Witness incredible slam dunks, three-pointers, and fierce competition that will keep you on the edge of your seat. Don't miss this epic showdown between two basketball powerhouses. Markannen vs Mills in a battle of the ages.</p>
-              <p class="event-date-HOME">2:30AM September 7</p>
+              <h3 class="event-title-HOME">{{event.name }}</h3>
+              <p class="event-description-HOME">{{event.description}}</p>
+              <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
               <div class="status-box-Soldout">
-                Sold Out
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="event-card-HOME">
-          <a href="EventsPage.html">
-            <img src="https://imageio.forbes.com/specials-images/imageserve/6301107ace22ca7251b74236/nfl2022-1x1/0x0.jpg?format=jpg&height=1080&width=1080" alt="Image 2">
-            <div class="event-info">
-              <h3 class="event-title-HOME">Sunday Night Football</h3>
-              <p class="event-description-HOME">It's a Sunday Night Football extravaganza! Under the dazzling lights, prepare for an unforgettable evening of gridiron magic. From electrifying touchdowns to bone-crushing tackles, this game promises football at its finest. Gather your friends and family for an evening of sports excitement that will have you cheering for your favorite team.</p>
-              <p class="event-date-HOME">8:00PM September 9</p>
-              <div class="status-box-active">
-                Active
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="event-card-HOME">
-          <a href="EventsPage.html">
-            <img src="https://images.genius.com/9c1df9a1c6c203a5f99dbd4b02d88759.1000x1000x1.png" alt="Image 2">
-            <div class="event-info">
-              <h3 class="event-title-HOME">NBA Draft</h3>
-              <p class="event-description-HOME">The future of basketball unfolds at the NBA Draft! As young talents step into the spotlight, watch their dreams come true. This event is where legends are born, and the next basketball sensation could be on the stage. Join us to witness history in the making and celebrate the bright future of the NBA. Jaren Jackson Jr. and Mike Conley headline the night.</p>
-              <p class="event-date-HOME">1:30PM September 10</p>
-              <div class="status-box-Soldout">
-                Sold Out
+                {{event.status}}
               </div>
             </div>
           </a>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 
 

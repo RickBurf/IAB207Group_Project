@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
+from .models import Event, Comment, User
 from .forms import EventForm, CommentForm
 from . import db
 import os
@@ -71,12 +71,14 @@ def comment(id):
     form = CommentForm()  
     #get the destination object associated to the page and the comment
     event = Event.query.get(id)  # Retrieve the Event object using its ID
+    user = User.query.get(id)  # Retrieve the User object using its ID
+
     if form.validate_on_submit():  
         # Read the comment from the form and create a new Comment object
         new_comment = Comment(
             text=form.text.data,
             event_id=event.id,
-            user_id=users.id,
+            user_id=user.id,
             created_at=datetime.now()
         )
         # Add the new comment to the database session and commit the changes
@@ -86,5 +88,6 @@ def comment(id):
         flash('Your comment has been added', 'success')  
         # Redirect to the event page with the specified ID
         return redirect(url_for('event.show', id=id))
-    # If the form doesn't validate, render the template with the form
+
+    # If the form doesn't validate or it's a GET request, render the template with the form
     return render_template('events/eventpage.html', form=form, events=[event])

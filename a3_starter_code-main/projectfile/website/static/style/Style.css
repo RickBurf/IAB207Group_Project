@@ -860,3 +860,8 @@ button.btn-primary {
   margin: 0; 
   padding: 5px 0;
 }
+
+.col-md-4 img {
+  height: 500px; /* Adjust the height as needed */
+  object-fit: cover; /* Preserve aspect ratio while filling the element */
+}

@@ -9,6 +9,8 @@ def index():
     events = db.session.scalars(db.select(Event)).all()    
     return render_template('index.html', events=events)
 
+
+
 @mainbp.route('/search')
 def search():
     if request.args['search'] and request.args['search'] != "":

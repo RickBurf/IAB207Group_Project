@@ -6,16 +6,16 @@ import os
 from werkzeug.utils import secure_filename
 #additional import:
 from flask_login import login_required, current_user
-
+from datetime import datetime
 
 eventbp = Blueprint('event', __name__, url_prefix='/events')
 
 @eventbp.route('/<id>')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
-    # create the comment form
     form = CommentForm()    
-    return render_template('events/show.html', event=event, form=form)
+    events = [event]  # creating a list with the single 'event'
+    return render_template('events/eventpage.html', events=events, form=form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -29,8 +29,8 @@ def create():
             name=form.name.data,
             description=form.description.data,
             image=db_file_path,
-            venue_address=form.Venue_Address.data,  # Updated field name to match your form
-            venue_name=form.Venue_Name.data,  # Updated field name to match your form
+            venue_address=form.Venue_Address.data,
+            venue_name=form.Venue_Name.data,
             start_date=form.Start_Date.data,
             end_date=form.End_Date.data,
             start_time=form.Start_Time.data,
@@ -70,17 +70,21 @@ def check_upload_file(form):
 def comment(id):  
     form = CommentForm()  
     #get the destination object associated to the page and the comment
-    event = db.session.scalar(db.select(Event).where(Event.id==id))
+    event = Event.query.get(id)  # Retrieve the Event object using its ID
     if form.validate_on_submit():  
-      #read the comment from the form
-      comment = Comment(text=form.text.data, event=event,
-                        user=current_user) 
-      #here the back-referencing works - comment.destination is set
-      # and the link is created
-      db.session.add(comment) 
-      db.session.commit() 
-      #flashing a message which needs to be handled by the html
-      flash('Your comment has been added', 'success')  
-      # print('Your comment has been added', 'success') 
-    # using redirect sends a GET request to destination.show
-    return redirect(url_for('event.show', id=id))
+        # Read the comment from the form and create a new Comment object
+        new_comment = Comment(
+            text=form.text.data,
+            event_id=event.id,
+            user_id=users.id,
+            created_at=datetime.now()
+        )
+        # Add the new comment to the database session and commit the changes
+        db.session.add(new_comment) 
+        db.session.commit() 
+        # Flash a success message
+        flash('Your comment has been added', 'success')  
+        # Redirect to the event page with the specified ID
+        return redirect(url_for('event.show', id=id))
+    # If the form doesn't validate, render the template with the form
+    return render_template('events/eventpage.html', form=form, events=[event])

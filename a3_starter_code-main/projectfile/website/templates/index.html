@@ -80,7 +80,7 @@
       {% for event in events %}
       <div class="col-md-4">
         <div class="event-card-HOME">
-          <a href="EventsPage.html">
+          <a href="{{ url_for('event.show', id=event.id) }}">
             <img src="{{event.image }}" alt="Image 2">
             <div class="event-info">
               <h3 class="event-title-HOME">{{event.name }}</h3>

@@ -124,3 +124,10 @@ def comment(id):
     # If the form doesn't validate or it's a GET request, render the template with the form
     return render_template('events/eventpage.html', form=form, events=[event])
 
+@eventbp.route('/history', methods=['GET', 'POST'])
+@login_required
+def history():
+    print('Method type: ', request.method)
+    # Always end with redirect when the form is valid
+    return render_template('events/history.html')
+

@@ -2,21 +2,15 @@
 
 {% from 'bootstrap5/form.html' import render_form %}
 
-
 {% block header %}
 
 {% endblock %}
 
-{% block content%}
-<div class="row">
-  <div class="Events_4U">
-      <div class="col-md-12">
-        <h1>Booking History </h1>
-      </div>
-    </div>  
+{% block content %}
 
-  {% for booking in bookings %}
-  <h2>{{booking.booking_id}}</h2>
-  {% endfor %}
+{% for booking in bookings %}
 
+<h1>{{ booking.premium_count }}</h1>
+
+{% endfor %}
 {% endblock %}

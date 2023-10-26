@@ -13,9 +13,10 @@ eventbp = Blueprint('event', __name__, url_prefix='/events')
 @eventbp.route('/<id>')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
-    form = CommentForm()    
+    comment_form = CommentForm()    
+    booking_form = BookingForm()
     events = [event]  # creating a list with the single 'event'
-    return render_template('events/eventpage.html', events=events, form=form)
+    return render_template('events/eventpage.html', events=events, comment_form=comment_form, booking_form=booking_form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -66,41 +67,13 @@ def check_upload_file(form):
     fp.save(upload_path)
     return db_upload_path
 
-
-@eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
-@login_required
-def comment(id):  
-    form = CommentForm()  
-    #get the destination object associated to the page and the comment
-    event = Event.query.get(id)  # Retrieve the Event object using its ID
-    user = User.query.get(id)  # Retrieve the User object using its ID
-
-    if form.validate_on_submit():  
-        # Read the comment from the form and create a new Comment object
-        new_comment = Comment(
-            text=form.text.data,
-            event_id=event.id,
-            user=current_user,
-            created_at=datetime.now()
-        )
-        # Add the new comment to the database session and commit the changes
-        db.session.add(new_comment) 
-        db.session.commit() 
-        # Flash a success message
-        flash('Your comment has been added', 'success')  
-        # Redirect to the event page with the specified ID
-        return redirect(url_for('event.show', id=id))
-
-    # If the form doesn't validate or it's a GET request, render the template with the form
-    return render_template('events/eventpage.html', form=form, events=[event])
-
 @eventbp.route('/<id>/booking', methods=['GET', 'POST'])  
 @login_required
 def booking(id):  
     form = BookingForm()  
     #get the destination object associated to the page and the comment
     event = Event.query.get(id)  # Retrieve the Event object using its ID
-    user = User.query.get(id)  # Retrieve the User object using its ID
+    user = User.query.get(current_user.id)  # Retrieve the User object using its ID
 
     if form.validate_on_submit():  
         # Read the comment from the form and create a new Comment object
@@ -117,7 +90,35 @@ def booking(id):
         # Flash a success message
         flash('Your Booking has been added', 'success')  
         # Redirect to the event page with the specified ID
-        return redirect(url_for('event.show', id=id))
+        return redirect(url_for('event.eventpage', id=id))
 
     # If the form doesn't validate or it's a GET request, render the template with the form
     return render_template('events/eventpage.html', form=form, events=[event])
+
+@eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
+@login_required
+def comment(id):  
+    form = CommentForm()  
+    #get the destination object associated to the page and the comment
+    event = Event.query.get(id)  # Retrieve the Event object using its ID
+    user = User.query.get(current_user.id) # Retrieve the User object using its ID
+
+    if form.validate_on_submit():  
+        # Read the comment from the form and create a new Comment object
+        new_comment = Comment(
+            text=form.text.data,
+            event_id=event.id,
+            user=current_user,
+            created_at=datetime.now()
+        )
+        # Add the new comment to the database session and commit the changes
+        db.session.add(new_comment) 
+        db.session.commit() 
+        # Flash a success message
+        flash('Your comment has been added', 'success')  
+        # Redirect to the event page with the specified ID
+        return redirect(url_for('event.eventpage', id=id))
+
+    # If the form doesn't validate or it's a GET request, render the template with the form
+    return render_template('events/eventpage.html', form=form, events=[event])
+

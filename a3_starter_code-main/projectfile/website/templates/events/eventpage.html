@@ -96,7 +96,7 @@
   </div>  
 
   <div class="row border-bottom"> 
-    {{ render_form(form, "/events/{0}/booking".format(event.id)) }}
+    {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
     
   </div>
 
@@ -107,7 +107,7 @@
   </div>  
 
   <div class="row border-bottom"> 
-    {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
+    {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
     
     {% for comment in event.comments %}
     <div class="col-md-12">  

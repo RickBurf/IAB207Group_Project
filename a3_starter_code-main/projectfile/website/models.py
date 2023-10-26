@@ -17,8 +17,8 @@ class Event(db.Model):
     sport = db.Column(db.String(80), nullable=False)
     status = db.Column(db.String(80), nullable=False)
     comments = db.relationship('Comment', backref='event')
-    standard_price = db.Column(db.String(10), nullable=False)
-    premium_price = db.Column(db.String(10), nullable=False)
+    standard_price = db.Column(db.Integer, nullable=False)
+    premium_price = db.Column(db.Integer, nullable=False)
     def __repr__(self):
         return f"Name: {self.name}"
 
@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
     emailid = db.Column(db.String(100), index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment', backref='user')
+    bookings = db.relationship('Booking', backref='user')
     def __repr__(self):
         return f"Name: {self.name}"
 
@@ -46,12 +47,13 @@ class Comment(db.Model):
 class Booking(db.Model):
     __tablename__ = 'bookings'
     booking_id = db.Column(db.Integer, primary_key=True)
-    premium_count = db.Column(db.String(400))
-    standard_count = db.Column(db.String(400))
-    total_price = db.Column(db.String(400))
+    premium_count = db.Column(db.Integer)
+    standard_count = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     booked_at = db.Column(db.DateTime, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    total_price = db.Column(db.Integer)
 
     def __repr__(self):
         return f"Booking: {self.text}"

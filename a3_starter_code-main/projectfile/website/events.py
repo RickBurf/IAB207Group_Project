@@ -81,8 +81,9 @@ def booking(id):
             premium_count = form.Premium_Count.data,
             standard_count = form.Standard_Count.data,
             event_id=event.id,
-            user=current_user,
-            created_at=datetime.now()
+            user=user,
+            created_at=datetime.now(),
+            total_price = form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price
         )
         # Add the new comment to the database session and commit the changes
         db.session.add(new_booking) 
@@ -90,7 +91,7 @@ def booking(id):
         # Flash a success message
         flash('Your Booking has been added', 'success')  
         # Redirect to the event page with the specified ID
-        return redirect(url_for('event.eventpage', id=id))
+        return redirect(url_for('event.show', id=id))
 
     # If the form doesn't validate or it's a GET request, render the template with the form
     return render_template('events/eventpage.html', form=form, events=[event])
@@ -108,8 +109,9 @@ def comment(id):
         new_comment = Comment(
             text=form.text.data,
             event_id=event.id,
-            user=current_user,
-            created_at=datetime.now()
+            user=user,
+            created_at=datetime.now(),
+            
         )
         # Add the new comment to the database session and commit the changes
         db.session.add(new_comment) 
@@ -117,7 +119,7 @@ def comment(id):
         # Flash a success message
         flash('Your comment has been added', 'success')  
         # Redirect to the event page with the specified ID
-        return redirect(url_for('event.eventpage', id=id))
+        return redirect(url_for('event.show', id=id))
 
     # If the form doesn't validate or it's a GET request, render the template with the form
     return render_template('events/eventpage.html', form=form, events=[event])

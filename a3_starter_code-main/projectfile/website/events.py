@@ -78,7 +78,11 @@ def comment(id):
         new_comment = Comment(
             text=form.text.data,
             event_id=event.id,
+<<<<<<< HEAD
             user_id=user.  id,
+=======
+            user=current_user,
+>>>>>>> 0879efb735c92561531d9658f396f9ee4ab19137
             created_at=datetime.now()
         )
         # Add the new comment to the database session and commit the changes

@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, TimeField, DateField, PasswordField
-from wtforms.validators import InputRequired, Email, EqualTo
+from wtforms import StringField, TextAreaField, SubmitField, TimeField, DateField, PasswordField, SelectField, FloatField
+from wtforms.validators import InputRequired, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
+SPORTS = {'AFL', 'Rugby League', 'Tennis'}
+
 
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[InputRequired()])
@@ -18,8 +20,10 @@ class EventForm(FlaskForm):
     End_Date = DateField('End Date', validators=[InputRequired()], format='%Y-%m-%d')
     Start_Time = TimeField('Start Time', validators=[InputRequired()])
     End_Time = TimeField('End Time', validators=[InputRequired()])
-    Sport = StringField('Sport', validators=[InputRequired()])
+    Sport = SelectField('Sport', choices=SPORTS, validators=[InputRequired()])
     Status = TextAreaField('Status', validators=[InputRequired()])
+    Standard_price = FloatField('Standard Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
+    Premium_price = FloatField('Premium Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
     submit = SubmitField("Create")
 
 #User login

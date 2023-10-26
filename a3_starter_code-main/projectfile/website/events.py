@@ -81,6 +81,8 @@ def booking(id):
             premium_count = form.Premium_Count.data,
             standard_count = form.Standard_Count.data,
             event_id=event.id,
+            name = event.name,
+            description = event.description,
             user=user,
             created_at=datetime.now(),
             total_price = form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price

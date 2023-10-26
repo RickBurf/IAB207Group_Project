@@ -1,16 +1,49 @@
 {% extends 'base.html' %}
 
-{% from 'bootstrap5/form.html' import render_form %}
-
 {% block header %}
 
 {% endblock %}
 
-{% block content %}
+{% block content%}
+<div class="row">
+  <div class="Events_4U">
+      <div class="col-md-12">
+        <h1>Booking History </h1>
+      </div>
+    </div>
 
-{% for booking in bookings %}
 
-<h1>{{ booking.premium_count }}</h1>
+    {% for booking in bookings %}
+  <div class="Past-Image-Container">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+              <div class="event-card">
+                <a href="EventsPage.html">
+                  <img src="https://justcalendars.com.au/cdn/shop/files/7a41e4c60c937531f85f1c6692d058d1_grande.jpg?v=1688715240" alt="Image 1">
+                  <div class="event-info">
+                    <h3 class="event-title">{{ booking.name }}</h3>
+                    <p class="event-description">{{ booking.description }}</p>
+                    <p class="event-date-HOME">{{ booking.booked_at }} </p>
+                    <div class="Event-Ticketing">
+                      <h3 class="event-date-HOME-TIX">Booking ID: {{ booking.booking_id }}</h3>
+                      <p class="event-date-HOME-TIX">Number of Premium Seats: {{ booking.premium_count}}</p>
+                      <p class="event-date-HOME-TIX">Number of Standard Seats: {{ booking.standard_count }} </p>
+                      <p class="event-date-HOME-TIX">Event Booked on {{ booking.booked_at }}</p>
+                    </div>
+                    <div class="ticket-section">
+                      <div class="status-box-Inactive1">
+                        Inactive
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+ 
 
-{% endfor %}
 {% endblock %}

@@ -16,6 +16,7 @@ def show(id):
     comment_form = CommentForm()    
     booking_form = BookingForm()
     events = [event]  # creating a list with the single 'event'
+    
     return render_template('events/eventpage.html', events=events, comment_form=comment_form, booking_form=booking_form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
@@ -128,8 +129,10 @@ def comment(id):
 
 @eventbp.route('/history', methods=['GET', 'POST'])
 @login_required
-def history():
+def history():  
+    booking = db.session.scalar(db.select(Booking).where(Booking.booking_id==id))
     print('Method type: ', request.method)
+    
     # Always end with redirect when the form is valid
-    return render_template('events/history.html')
+    return render_template('events/history.html', bookings = [booking])
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment, User
-from .forms import EventForm, CommentForm
+from .models import Event, Comment, User, Booking
+from .forms import EventForm, CommentForm, BookingForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -36,7 +36,9 @@ def create():
             start_time=form.Start_Time.data,
             end_time=form.End_Time.data,
             sport=form.Sport.data,
-            status=form.Status.data
+            status=form.Status.data,
+            premium_price = form.Premium_price.data,
+            standard_price = form.Standard_price.data,
         )
         # add the object to the db session
         db.session.add(event)
@@ -86,6 +88,34 @@ def comment(id):
         db.session.commit() 
         # Flash a success message
         flash('Your comment has been added', 'success')  
+        # Redirect to the event page with the specified ID
+        return redirect(url_for('event.show', id=id))
+
+    # If the form doesn't validate or it's a GET request, render the template with the form
+    return render_template('events/eventpage.html', form=form, events=[event])
+
+@eventbp.route('/<id>/booking', methods=['GET', 'POST'])  
+@login_required
+def booking(id):  
+    form = BookingForm()  
+    #get the destination object associated to the page and the comment
+    event = Event.query.get(id)  # Retrieve the Event object using its ID
+    user = User.query.get(id)  # Retrieve the User object using its ID
+
+    if form.validate_on_submit():  
+        # Read the comment from the form and create a new Comment object
+        new_booking = Booking(
+            premium_count = form.Premium_Count.data,
+            standard_count = form.Standard_Count.data,
+            event_id=event.id,
+            user=current_user,
+            created_at=datetime.now()
+        )
+        # Add the new comment to the database session and commit the changes
+        db.session.add(new_booking) 
+        db.session.commit() 
+        # Flash a success message
+        flash('Your Booking has been added', 'success')  
         # Redirect to the event page with the specified ID
         return redirect(url_for('event.show', id=id))
 

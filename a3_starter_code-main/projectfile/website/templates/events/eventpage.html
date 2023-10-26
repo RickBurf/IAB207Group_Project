@@ -89,7 +89,16 @@
       </div>
   </div>
 
-  <a href="#" class="btn btn-danger">Book Now</a>  
+  <div class="row">  
+    <div class="col-md-12">  
+      <h2>Booking</h2>  
+    </div>  
+  </div>  
+
+  <div class="row border-bottom"> 
+    {{ render_form(form, "/events/{0}/booking".format(event.id)) }}
+    
+  </div>
 
   <div class="row">  
     <div class="col-md-12">  

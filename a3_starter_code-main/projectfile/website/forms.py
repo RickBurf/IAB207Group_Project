@@ -47,3 +47,8 @@ class RegisterForm(FlaskForm):
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
   submit = SubmitField('Create')
+  
+class BookingForm(FlaskForm):
+  Standard_Count = FloatField('Standard Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive whole number")], default=0)
+  Premium_Count = FloatField('Premium Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive whole number")], default=0)
+  submit = SubmitField('Order')

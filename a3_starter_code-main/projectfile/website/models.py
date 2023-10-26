@@ -17,7 +17,8 @@ class Event(db.Model):
     sport = db.Column(db.String(80), nullable=False)
     status = db.Column(db.String(80), nullable=False)
     comments = db.relationship('Comment', backref='event')
-
+    standard_price = db.Column(db.String(10), nullable=False)
+    premium_price = db.Column(db.String(10), nullable=False)
     def __repr__(self):
         return f"Name: {self.name}"
 
@@ -41,3 +42,16 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment: {self.text}"
+    
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+    booking_id = db.Column(db.Integer, primary_key=True)
+    premium_count = db.Column(db.String(400))
+    standard_count = db.Column(db.String(400))
+    total_price = db.Column(db.String(400))
+    booked_at = db.Column(db.DateTime, default=datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
+    def __repr__(self):
+        return f"Booking: {self.text}"

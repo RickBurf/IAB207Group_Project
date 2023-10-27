@@ -133,4 +133,3 @@ def history():
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
     # Pass the bookings to the template for rendering
     return render_template('events/history.html', bookings=bookings)
-

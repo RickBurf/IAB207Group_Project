@@ -19,13 +19,13 @@
           {% for booking in bookings %}
           <div class="col-md-3">
             {% if booking.event %}
-            <div class="event-card">
+            <div class="event-card2">
               <a href="EventsPage.html">
-                <img src= "{{ booking.event.image }}" alt="Image 1">
-                <div class="event-info">
-                  <h3 class="event-title">{{ booking.event.name }}</h3>
-                  <p class="event-description">{{ booking.event.description }}</p>
-                  <p class="event-date-HOME">{{ booking.booked_at }} </p>
+                <img src= "{{ booking.event.image }}" class="bookinghistoryimage" alt="Image 1">
+                <div class="sevent-info">
+                  <h3 class="sevent-title">{{ booking.event.name }}</h3>
+                  <p class="sevent-description">{{ booking.event.description }}</p>
+                  <p class="sevent-date-HOME">{{ booking.booked_at }} </p>
                   <div class="Event-Ticketing">
                     <h3 class="event-date-HOME-TIX">Booking ID: {{ booking.booking_id }}</h3>
                     <p class="event-date-HOME-TIX">Number of Premium Seats: {{ booking.premium_count}}</p>

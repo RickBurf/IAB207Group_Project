@@ -53,9 +53,12 @@ class Booking(db.Model):
     booked_at = db.Column(db.DateTime, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-    name = db.Column(db.String(80), db.ForeignKey('events.name'))
-    description = db.Column(db.String(200), db.ForeignKey('events.description'))
+    name = db.Column(db.String(80))
+    description = db.Column(db.String(200))
     total_price = db.Column(db.Integer)
+
+    # Relationship with the Event model
+    event = db.relationship('Event', backref='bookings')
 
     def __repr__(self):
         return f"Booking: {self.text}"

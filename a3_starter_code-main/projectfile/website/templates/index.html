@@ -9,24 +9,14 @@
   <div class="slideshow-container">
     <div class="row">
       <div class="col-md-12">
+        {% for event in events %}
         <div class="mySlides">
-          <a href="EventsPage.html">
-            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx302461.jpg" style="width:100%"
-              alt="Slideshow AFL FINALS">
+          <a href="{{ url_for('event.show', id=event.id) }}">
+            <img src="{{ event.image }}" class="slideshow-image" alt="Slideshow Image">
           </a>
         </div>
-        <div class="mySlides">
-          <a href="EventsPage.html">
-            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx300800.jpg" style="width:100%"
-              alt="Slideshow NRL FINALS">
-          </a>
-        </div>
-        <div class="mySlides">
-          <a href="EventsPage.html">
-            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx295358.jpg" style="width:100%"
-              alt="Slideshow NHL Exhibition">
-          </a>
-        </div>
+        {% endfor %}
+
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
         <br>
@@ -71,33 +61,35 @@
 </script>
 </div>
 
+<div class="row">
+  <div class="container">
+    <div class="row mt-5 pb-4">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+          <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
+            <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm" placeholder="Search for Events">
+            <button type="submit" id="custom-btn" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+          </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+
 <div class="Events_For_You">
   <div class="col-md-12">
     <h1> Events For You</h1>
   </div>
 </div>
 
-<!--Jumbotron-->
-<div class="row">
-    <div class="container">
-      <div class="row mt-5 pb-4">
-        <div class="col-md-8">
-            <h1 class="mb-3">Search Events</h1>
-            <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
-              <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
-              <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  
-</div>
 
-<div class="image-row">
+
+<div class="image-row-created">
   <div class="row">
     {% for event in events %}
     <div class="col-md-4">
-      <div class="event-card-HOME">
+      <div class="event-cards-home">
         <a href="{{ url_for('event.show', id=event.id) }}">
           <img src="{{event.image }}" alt="Image 2">
           <div class="event-info">

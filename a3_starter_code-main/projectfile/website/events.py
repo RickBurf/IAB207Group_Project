@@ -16,7 +16,6 @@ def show(id):
     comment_form = CommentForm()    
     booking_form = BookingForm()
     events = [event]  # creating a list with the single 'event'
-    
     return render_template('events/eventpage.html', events=events, comment_form=comment_form, booking_form=booking_form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
@@ -79,14 +78,14 @@ def booking(id):
     if form.validate_on_submit():  
         # Read the comment from the form and create a new Comment object
         new_booking = Booking(
-            premium_count = form.Premium_Count.data,
-            standard_count = form.Standard_Count.data,
+            premium_count=form.Premium_Count.data,
+            standard_count=form.Standard_Count.data,
             event_id=event.id,
+            user=user,
             name = event.name,
             description = event.description,
-            user=user,
             created_at=datetime.now(),
-            total_price = form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price
+            total_price=form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price
         )
         # Add the new comment to the database session and commit the changes
         db.session.add(new_booking) 
@@ -113,8 +112,7 @@ def comment(id):
             text=form.text.data,
             event_id=event.id,
             user=user,
-            created_at=datetime.now(),
-            
+            created_at=datetime.now()
         )
         # Add the new comment to the database session and commit the changes
         db.session.add(new_comment) 
@@ -129,10 +127,10 @@ def comment(id):
 
 @eventbp.route('/history', methods=['GET', 'POST'])
 @login_required
-def history():  
-    booking = db.session.scalar(db.select(Booking).where(Booking.booking_id==id))
+def history():
     print('Method type: ', request.method)
-    
-    # Always end with redirect when the form is valid
-    return render_template('events/history.html', bookings = [booking])
+    # Retrieve bookings from the database
+    bookings = Booking.query.filter_by(user_id=current_user.id).all()
+    # Pass the bookings to the template for rendering
+    return render_template('events/history.html', bookings=bookings)
 

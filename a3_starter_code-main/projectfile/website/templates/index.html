@@ -1,101 +1,119 @@
 {% extends 'base.html' %}
-
+{% from 'bootstrap5/form.html' import render_form %}
 {% block header %}
 
 {% endblock %}
 
 {% block content%}
-    <div class="container">
-        <div class="slideshow-container">
-        <div class="row">
-            <div class="col-md-12">
-            <div class="mySlides">
-                <a href="EventsPage.html">
-                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx302461.jpg" style="width:100%" alt="Slideshow AFL FINALS">
-            </a>
-            </div>
-            <div class="mySlides">
-                <a href="EventsPage.html">
-                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx300800.jpg" style="width:100%" alt="Slideshow NRL FINALS">
-                </a>
-            </div>
-            <div class="mySlides">
-                <a href="EventsPage.html">
-                <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx295358.jpg" style="width:100%" alt="Slideshow NHL Exhibition">
-                </a>
-            </div>
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            <br>
-
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-    }
-    </script>
-    </div>
-
-<div class="Events_For_You">
-    <div class="col-md-12">
-        <h1> Events For You</h1>
-    </div>
-</div>
-
-
-<div class="image-row">
+<div class="container">
+  <div class="slideshow-container">
     <div class="row">
-      {% for event in events %}
-      <div class="col-md-4">
-        <div class="event-card-HOME">
-          <a href="{{ url_for('event.show', id=event.id) }}">
-            <img src="{{event.image }}" alt="Image 2">
-            <div class="event-info">
-              <h3 class="event-title-HOME">{{event.name }}</h3>
-              <p class="event-description-HOME">{{event.description}}</p>
-              <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
-              <div class="status-box-Soldout">
-                {{event.status}}
-              </div>
-            </div>
+      <div class="col-md-12">
+        <div class="mySlides">
+          <a href="EventsPage.html">
+            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx302461.jpg" style="width:100%"
+              alt="Slideshow AFL FINALS">
           </a>
         </div>
+        <div class="mySlides">
+          <a href="EventsPage.html">
+            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx300800.jpg" style="width:100%"
+              alt="Slideshow NRL FINALS">
+          </a>
+        </div>
+        <div class="mySlides">
+          <a href="EventsPage.html">
+            <img src="https://d35kvm5iuwjt9t.cloudfront.net/dbimages/sfx295358.jpg" style="width:100%"
+              alt="Slideshow NHL Exhibition">
+          </a>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <br>
+
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
       </div>
-      {% endfor %}
     </div>
   </div>
+</div>
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+  }
+</script>
+</div>
+
+<div class="Events_For_You">
+  <div class="col-md-12">
+    <h1> Events For You</h1>
+  </div>
+</div>
+
+<!--Jumbotron-->
+<div class="row">
+    <div class="container">
+      <div class="row mt-5 pb-4">
+        <div class="col-md-8">
+            <h1 class="mb-3">Search Events</h1>
+            <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
+              <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+              <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+<div class="image-row">
+  <div class="row">
+    {% for event in events %}
+    <div class="col-md-4">
+      <div class="event-card-HOME">
+        <a href="{{ url_for('event.show', id=event.id) }}">
+          <img src="{{event.image }}" alt="Image 2">
+          <div class="event-info">
+            <h3 class="event-title-HOME">{{event.name }}</h3>
+            <p class="event-description-HOME">{{event.description}}</p>
+            <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
+            <div class="status-box-Soldout">
+              {{event.status}}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 
 </div>

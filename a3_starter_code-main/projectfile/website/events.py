@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event, Comment, User, Booking
-from .forms import EventForm, CommentForm, BookingForm
+from .forms import EventForm, CommentForm, BookingForm, UpdateForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -17,6 +17,16 @@ def show(id):
     booking_form = BookingForm()
     events = [event]  # creating a list with the single 'event'
     return render_template('events/eventpage.html', events=events, comment_form=comment_form, booking_form=booking_form)
+
+@eventbp.route('/<id>/update')
+def update(id):
+    print('Method type: ', request.method)
+    event = Event.query.get(id)
+    form = UpdateForm()   
+    if form.validate_on_submit():
+        flash('Successfully updated event', 'success')
+        return redirect(url_for('event.show', id=id))
+    return render_template('events/update.html', form=form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -40,7 +50,8 @@ def create():
             #status=form.Status.data,
             premium_price = form.Premium_price.data,
             standard_price = form.Standard_price.data,
-            number_tickets = form.Number_Tickets.data
+            number_tickets = form.Number_Tickets.data,
+            user_id = current_user.id
         )
         if form.Start_Date.data < datetime.now().date():
             event.status = "INACTIVE"
@@ -144,3 +155,13 @@ def history():
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
     # Pass the bookings to the template for rendering
     return render_template('events/history.html', bookings=bookings)
+
+@eventbp.route('/myEvents', methods=['GET', 'POST'])
+@login_required
+def myEvents():
+    print('Method type: ', request.method)
+    # Retrieve bookings from the database
+    events = db.session.scalars(db.select(Event).where(Event.user_id==current_user.id)).all()
+    # Pass the bookings to the template for rendering
+    return render_template('events/myEvents.html', events=events)
+

@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, TimeField, DateField, PasswordField, SelectField, FloatField
 from wtforms.validators import InputRequired, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
+from .models import Event
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 SPORTS = {'AFL', 'Rugby League', 'Tennis'}
@@ -56,3 +57,8 @@ class BookingForm(FlaskForm):
 
 class FilterForm(FlaskForm):
    choice = SelectField('Filter', choices = SPORTS)
+
+class UpdateForm(FlaskForm):
+    name = StringField('Event Name')
+
+    submit = SubmitField("Update")

@@ -99,7 +99,9 @@
             </div>
         </div>
     </div>
-
+    {% if event.user_id == current_user.id %}
+    <a class=" nav-link" href="{{ url_for('event.update', id=event.id) }}"> Update Event</a>
+    {% endif %}
     <div class="row">
         <div class="col-md-12">
             <h2>Booking</h2>
@@ -107,6 +109,7 @@
     </div>
     {% if event.status == 'OPEN' %}
     <div class="row border-bottom">
+        <p>Tickets Available: {{event.number_tickets}}</p>
         {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
     </div>
     {% else %}

@@ -37,10 +37,18 @@ def create():
             start_time=form.Start_Time.data,
             end_time=form.End_Time.data,
             sport=form.Sport.data,
-            status=form.Status.data,
+            #status=form.Status.data,
             premium_price = form.Premium_price.data,
             standard_price = form.Standard_price.data,
+            number_tickets = form.Number_Tickets.data
         )
+        if form.Start_Date.data < datetime.now().date():
+            event.status = "INACTIVE"
+        elif form.Start_Date.data == datetime.now().date():
+            if form.Start_Time.data < datetime.now().time():
+                event.status = "INACTIVE"
+        else: event.status = "OPEN"
+
         # add the object to the db session
         db.session.add(event)
         # commit to the database
@@ -87,6 +95,9 @@ def booking(id):
             created_at=datetime.now(),
             total_price=form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price
         )
+        event.number_tickets -= (form.Premium_Count.data + form.Standard_Count.data)
+        if event.number_tickets <= 0:
+            event.status = "SOLD OUT"
         # Add the new comment to the database session and commit the changes
         db.session.add(new_booking) 
         db.session.commit() 

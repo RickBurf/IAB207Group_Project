@@ -11,111 +11,123 @@
 {% for event in events %}
 
 <main>
-  <div class="Chosen_Event_Image_Container">
-      <div class="row">
-          <div class="col-md-12 text-center">
-              <img src="{{ event.image }}" alt="Image 2">
-          </div>
-      </div>
-  </div>
-  <div class="Events_4U1">
-      <div class="row">
-          <div class="col-md-12">
-          <h1>{{ event.name }}</h1>
-          </div>
-      </div>
-  </div> 
+    <div class="Chosen_Event_Image_Container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{{ event.image }}" alt="Image 2">
+            </div>
+        </div>
+    </div>
+    <div class="Events_4U1">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ event.name }}</h1>
+            </div>
+        </div>
+    </div>
 
-  <div class="Chosen_Event_Card">
-      <div class="row">
-          <div class="col-md-4">
-              <h3>{{ event.start_time }}</h3>
-          </div>
-          <div class="col-md-4">
-              <h3>{{ event.start_date }}</h3>
-          </div>
-          <div class="col-md-4">
-              <div class="status-box">
-                {{ event.status }}
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="Chosen_Event_Card">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>{{ event.start_time }}</h3>
+            </div>
+            <div class="col-md-4">
+                <h3>{{ event.start_date }}</h3>
+            </div>
+            <div class="col-md-4">
+                {% if event.status == 'SOLD OUT' %}
+                <div class="status-box-Soldout">
+                  {{event.status}}
+                </div>
+                {% elif event.status == 'OPEN' %}
+                <div class="status-box">
+                  {{event.status}}
+                </div>
+                {% elif event.status == 'INACTIVE' %}
+                <div class="status-box-Inactive">
+                  {{event.status}}
+                </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
 
-  <div class="Chosen_Event_Description">
-      <div class="row">
-          <div class="col-md-12">
-              <p>{{ event.description }}</p>
-          </div>
-      </div>
-  </div>
+    <div class="Chosen_Event_Description">
+        <div class="row">
+            <div class="col-md-12">
+                <p>{{ event.description }}</p>
+            </div>
+        </div>
+    </div>
 
-  <div class="Chosen_Event_Location">
-      <div class="row">
-          <div class="col-md-1">
-              <img src="https://www.freeiconspng.com/thumbs/location-icon-png/location-icon-map-png--1.png" alt="Location_Logo">
-          </div>
+    <div class="Chosen_Event_Location">
+        <div class="row">
+            <div class="col-md-1">
+                <img src="https://www.freeiconspng.com/thumbs/location-icon-png/location-icon-map-png--1.png"
+                    alt="Location_Logo">
+            </div>
 
-          <div class="col-md-11">
-              <h1>{{ event.venue_name }}</h1>
-              <p>{{ event.venue_address }}</p>
-          </div>
-      </div>
-  </div>
+            <div class="col-md-11">
+                <h1>{{ event.venue_name }}</h1>
+                <p>{{ event.venue_address }}</p>
+            </div>
+        </div>
+    </div>
 
-  <div class="Chosen_Event_Sport">
-      <div class="row">
-          <div class="col-md-1">
-              <img src="https://cdn-icons-png.flaticon.com/512/46/46106.png" alt="Sport_Logo">
-          </div>
+    <div class="Chosen_Event_Sport">
+        <div class="row">
+            <div class="col-md-1">
+                <img src="https://cdn-icons-png.flaticon.com/512/46/46106.png" alt="Sport_Logo">
+            </div>
 
-          <div class="col-md-11">
-              <h1>{{ event.sport }}</h1>
-              <p>{{ event.name }}</p>
-          </div>
-      </div>
-  </div>
+            <div class="col-md-11">
+                <h1>{{ event.sport }}</h1>
+                <p>{{ event.name }}</p>
+            </div>
+        </div>
+    </div>
 
-  <div class="Chosen_Event_Sport">
-      <div class="row">
-          <div class="col-md-1">
-              <img src="https://cdn-icons-png.flaticon.com/512/281/281668.png" alt="Clock_Logo">
-          </div>
+    <div class="Chosen_Event_Sport">
+        <div class="row">
+            <div class="col-md-1">
+                <img src="https://cdn-icons-png.flaticon.com/512/281/281668.png" alt="Clock_Logo">
+            </div>
 
-          <div class="col-md-11">
-              <h1>Duration</h1>
-              <p>{{ Event_Duration }}</p>
-          </div>
-      </div>
-  </div>
+            <div class="col-md-11">
+                <h1>Duration</h1>
+                <p>{{ Event_Duration }}</p>
+            </div>
+        </div>
+    </div>
 
-  <div class="row">  
-    <div class="col-md-12">  
-      <h2>Booking</h2>  
-    </div>  
-  </div>  
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Booking</h2>
+        </div>
+    </div>
+    {% if event.status == 'OPEN' %}
+    <div class="row border-bottom">
+        {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
+    </div>
+    {% else %}
+    <h4>Booking is unavailable for this event.</h4>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Comments</h2>
+        </div>
+    </div>
 
-  <div class="row border-bottom"> 
-    {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
-    
-  </div>
+    <div class="row border-bottom">
+        {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
 
-  <div class="row">  
-    <div class="col-md-12">  
-      <h2>Comments</h2>  
-    </div>  
-  </div>  
-
-  <div class="row border-bottom"> 
-    {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
-    
-    {% for comment in event.comments %}
-    <div class="col-md-12">  
-      <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{comment.created_at.date()}}</span></b>
-      <p>{{ comment.text }}</p>  
-    </div> 
-    {% endfor %} 
-  </div>
+        {% for comment in event.comments %}
+        <div class="col-md-12">
+            <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{comment.created_at.date()}}</span></b>
+            <p>{{ comment.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
 </main>
 
 {% endfor %}

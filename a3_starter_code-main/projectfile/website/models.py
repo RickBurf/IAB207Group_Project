@@ -19,6 +19,7 @@ class Event(db.Model):
     comments = db.relationship('Comment', backref='event')
     standard_price = db.Column(db.Integer, nullable=False)
     premium_price = db.Column(db.Integer, nullable=False)
+    number_tickets = db.Column(db.Integer, nullable=False)
     def __repr__(self):
         return f"Name: {self.name}"
 

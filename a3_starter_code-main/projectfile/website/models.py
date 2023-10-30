@@ -55,8 +55,8 @@ class Booking(db.Model):
     booked_at = db.Column(db.DateTime, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-    name = db.Column(db.String(80))
-    description = db.Column(db.String(200))
+    #name = db.Column(db.String(80))
+    #description = db.Column(db.String(200))
     total_price = db.Column(db.Integer)
 
     # Relationship with the Event model

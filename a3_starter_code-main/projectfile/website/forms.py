@@ -5,24 +5,24 @@ from flask_wtf.file import FileRequired, FileField, FileAllowed
 from .models import Event
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
-SPORTS = {'AFL', 'Rugby League', 'Tennis'}
+SPORTS = {'AFL','Basketball', 'Soccer', 'Rugby League', 'Tennis', 'Volleyball', 'Cricket', 'Badminton', 'Ice Hockey', 'Boxing', 'Baseball'}
 
 
 class EventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired()])
-    description = TextAreaField('Description', validators=[InputRequired()])
+    name = StringField('Event Name')
+    description = TextAreaField('Description')
     image = FileField('Destination Image', validators=[
         FileRequired(message='Image cannot be empty'),
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')
     ])
-    Venue_Address = TextAreaField('Venue Address', validators=[InputRequired()])
-    Venue_Name = TextAreaField('Venue Name', validators=[InputRequired()])
-    Start_Date = DateField('Start Date', validators=[InputRequired()], format='%Y-%m-%d')
-    End_Date = DateField('End Date', validators=[InputRequired()], format='%Y-%m-%d')
-    Start_Time = TimeField('Start Time', validators=[InputRequired()])
-    End_Time = TimeField('End Time', validators=[InputRequired()])
-    Sport = SelectField('Sport', choices=SPORTS, validators=[InputRequired()])
-    #Status = TextAreaField('Status', validators=[InputRequired()])
+    Venue_Address = TextAreaField('Venue Address')
+    Venue_Name = TextAreaField('Venue Name')
+    Start_Date = DateField('Start Date', format='%Y-%m-%d')
+    End_Date = DateField('End Date', format='%Y-%m-%d')
+    Start_Time = TimeField('Start Time')
+    End_Time = TimeField('End Time')
+    Sport = SelectField('Sport', choices=SPORTS)
+    #Status = TextAreaField('Status')
     Number_Tickets = FloatField('Tickets Available', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
     Standard_price = FloatField('Standard Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
     Premium_price = FloatField('Premium Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
@@ -36,7 +36,7 @@ class LoginForm(FlaskForm):
 
 #User register
 class RegisterForm(FlaskForm):
-    user_name = StringField("User Name", validators=[InputRequired()])
+    user_name = StringField("User Name")
     email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
     
     #linking two fields - password should be equal to data entered in confirm
@@ -59,6 +59,21 @@ class FilterForm(FlaskForm):
    choice = SelectField('Filter', choices = SPORTS)
 
 class UpdateForm(FlaskForm):
-    name = StringField('Event Name')
-
-    submit = SubmitField("Update")
+    name = StringField('Change Event Name')
+    description = TextAreaField('Change Description')
+    image = FileField('Change Destination Image', validators=[
+        FileRequired(message='Image cannot be empty'),
+        FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')
+    ])
+    Venue_Address = TextAreaField('Change Venue Address')
+    Venue_Name = TextAreaField('Change Venue Name')
+    Start_Date = DateField('Change Start Date', format='%Y-%m-%d')
+    End_Date = DateField('Change End Date', format='%Y-%m-%d')
+    Start_Time = TimeField('Change Start Time')
+    End_Time = TimeField('Change End Time')
+    Sport = SelectField('Change Sport', choices=SPORTS)
+    #Status = TextAreaField('Status')
+    Number_Tickets = FloatField('Add Extra Tickets', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
+    Standard_price = FloatField('Change Standard Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
+    Premium_price = FloatField('Change Premium Price', validators=[InputRequired(), NumberRange(min=0, message="Price must be a positive number")])
+    submit = SubmitField("Update Event Details")

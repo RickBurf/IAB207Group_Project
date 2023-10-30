@@ -18,12 +18,28 @@ def show(id):
     events = [event]  # creating a list with the single 'event'
     return render_template('events/eventpage.html', events=events, comment_form=comment_form, booking_form=booking_form)
 
-@eventbp.route('/<id>/update')
+@eventbp.route('/<id>/update', methods=['GET', 'POST'])
 def update(id):
     print('Method type: ', request.method)
     event = Event.query.get(id)
     form = UpdateForm()   
     if form.validate_on_submit():
+        event.name=form.name.data
+        event.description=form.description.data
+        db_file_path = check_upload_file(form)
+        event.image=db_file_path
+        event.venue_address=form.Venue_Address.data
+        event.venue_name=form.Venue_Name.data
+        event.start_date=form.Start_Date.data
+        event.end_date=form.End_Date.data
+        event.start_time=form.Start_Time.data
+        event.end_time=form.End_Time.data
+        event.sport=form.Sport.data
+        event.premium_price = form.Premium_price.data
+        event.standard_price = form.Standard_price.data
+        event.number_tickets += form.Number_Tickets.data
+        event.user_id = current_user.id
+        db.session.commit()
         flash('Successfully updated event', 'success')
         return redirect(url_for('event.show', id=id))
     return render_template('events/update.html', form=form)
@@ -101,8 +117,8 @@ def booking(id):
             standard_count=form.Standard_Count.data,
             event_id=event.id,
             user=user,
-            name = event.name,
-            description = event.description,
+            #name = event.name,
+            #description = event.description,
             created_at=datetime.now(),
             total_price=form.Premium_Count.data * event.premium_price + form.Standard_Count.data * event.standard_price
         )
@@ -153,6 +169,7 @@ def history():
     print('Method type: ', request.method)
     # Retrieve bookings from the database
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
+    #bookings = db.session.query(Booking, Event).filter(Booking.user_id == current_user.id).filter(Event.id==Booking.event_id).all()
     # Pass the bookings to the template for rendering
     return render_template('events/history.html', bookings=bookings)
 

@@ -20,7 +20,7 @@
           <div class="col-md-3">
             {% if booking.event %}
             <div class="event-card2">
-              <a href="EventsPage.html">
+              <a href="{{ url_for('event.show', id=booking.event.id) }}">
                 <img src= "{{ booking.event.image }}" class="bookinghistoryimage" alt="Image 1">
                 <div class="sevent-info">
                   <h3 class="sevent-title">{{ booking.event.name }}</h3>
@@ -30,12 +30,23 @@
                     <h3 class="event-date-HOME-TIX">Booking ID: {{ booking.booking_id }}</h3>
                     <p class="event-date-HOME-TIX">Number of Premium Seats: {{ booking.premium_count}}</p>
                     <p class="event-date-HOME-TIX">Number of Standard Seats: {{ booking.standard_count }} </p>
+                    <p class="event-date-HOME-TIX">Total Price: ${{ booking.total_price }} </p>
                     <p class="event-date-HOME-TIX">Event Booked on {{ booking.booked_at }}</p>
                   </div>
                   <div class="ticket-section">
-                    <div class="status-box-Inactive1">
-                      Inactive
-                    </div>
+                    {% if booking.event.status == 'SOLD OUT' %}
+                <div class="status-box-Soldout">
+                  {{booking.event.status}}
+                </div>
+                {% elif booking.event.status == 'OPEN' %}
+                <div class="status-box">
+                  {{booking.event.status}}
+                </div>
+                {% elif booking.event.status == 'INACTIVE' %}
+                <div class="status-box-Inactive">
+                  {{booking.event.status}}
+                </div>
+                {%endif%}
                   </div>
                 </div>
               </a>

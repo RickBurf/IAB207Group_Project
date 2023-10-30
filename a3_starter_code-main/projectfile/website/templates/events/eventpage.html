@@ -52,13 +52,17 @@
         </div>
     </div>
 
+
     <div class="Chosen_Event_Description">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-md-12" style="text-align:center">
                 <p>{{ event.description }}</p>
             </div>
         </div>
     </div>
+
+
+    
 
     <div class="Chosen_Event_Location">
         <div class="row">
@@ -99,37 +103,56 @@
             </div>
         </div>
     </div>
+
+    <div class="Chosen_Event_Tickets">
+        <div class="row">
+            <div class="col-md-1">
+                <img src="https://www.freeiconspng.com/uploads/the-black-ticket-for-your-projects-ticket-symbol-2.png" alt="Ticket_Logo">
+            </div>
+
+            <div class="col-md-11">
+                <h1>Tickets Available</h1>
+                <p>{{event.number_tickets}}</p>
+            </div>
+        </div>
+    </div>
+    
+
     {% if event.user_id == current_user.id %}
     <a class=" nav-link" href="{{ url_for('event.update', id=event.id) }}"> Update Event</a>
     {% endif %}
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Booking</h2>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-12" style="text-align:center">
+                <h2>Booking</h2>
         </div>
     </div>
     {% if event.status == 'OPEN' %}
-    <div class="row border-bottom">
-        <p>Tickets Available: {{event.number_tickets}}</p>
-        {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
+    <div class="row justify-content-center">
+            <div class="col-md-5">
+            {{ render_form(booking_form, "/events/{0}/booking".format(event.id)) }}
+            </div>
     </div>
     {% else %}
     <h4>Booking is unavailable for this event.</h4>
     {% endif %}
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-center">
+        <div class="col-md-12" style="text-align:center">
             <h2>Comments</h2>
         </div>
     </div>
+    <div class="row justify-content-center">
 
-    <div class="row border-bottom">
-        {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
-
-        {% for comment in event.comments %}
-        <div class="col-md-12">
-            <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{comment.created_at.date()}}</span></b>
-            <p>{{ comment.text }}</p>
+            <div class="col-md-9">
+            {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
+            {% for comment in event.comments %}
+            </div>
+            <div class="col-md-9">
+                <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{comment.created_at.date()}}</span></b>
+                <p>{{ comment.text }}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </main>
 

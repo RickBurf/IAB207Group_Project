@@ -593,6 +593,33 @@ margin-left: 8%;
 align-items: left;
 }
 
+.Chosen_Event_Tickets {
+  padding-top: 10px;
+  margin-left: 19%;
+  margin-right: 35%;
+  padding-bottom: 10px;
+  }
+
+.Chosen_Event_Tickets img {
+  padding-bottom: 5%;
+  margin-right: 10%;
+  width: 55px;
+  height: auto;
+  padding-top: 25%;
+  }
+
+.Chosen_Event_Tickets .col-md-11 h1 {
+   margin-left: 8%;
+   font-size: 20px;
+   align-items: left;
+   font-weight: bold;
+   }
+
+.Chosen_Event_Tickets .col-md-11 p {
+  margin-left: 8%;
+  align-items: left;
+  }
+
 .Comments_Box {
 margin-left: 22%;
 margin-right: 22%;

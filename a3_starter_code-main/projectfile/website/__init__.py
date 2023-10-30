@@ -84,20 +84,6 @@ def create_app():
     def not_found(e): 
       return render_template("error.html", error=e)
     
-    @app.errorhandler(506) 
-    # inbuilt function which takes error as parameter 
-    def not_found(e): 
-      return render_template("error.html", error=e)
-    
-    @app.errorhandler(507) 
-    # inbuilt function which takes error as parameter 
-    def not_found(e): 
-      return render_template("error.html", error=e)
-    
-    @app.errorhandler(508) 
-    # inbuilt function which takes error as parameter 
-    def not_found(e): 
-      return render_template("error.html", error=e)
 
     #this creates a dictionary of variables that are available to all templates
     @app.context_processor

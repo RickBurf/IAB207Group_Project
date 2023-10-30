@@ -31,12 +31,10 @@
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
         <br>
 
-        <div class="row justify-content-center">
         <div style="text-align:center">
           <span class="dot" onclick="currentSlide(1)"></span>
           <span class="dot" onclick="currentSlide(2)"></span>
           <span class="dot" onclick="currentSlide(3)"></span>
-          </div>
         </div>
       </div>
     </div>
@@ -75,11 +73,24 @@
 
 <div class="Events_For_You">
   <div class="col-md-12">
-    <h1> Events </h1>
+    <h1> Events For You</h1>
   </div>
 </div>
 
 <!--Jumbotron-->
+<div class="row">
+  <div class="container">
+    <div class="row mt-5 pb-4">
+      <div class="col-md-8">
+        <h1 class="mb-3">Search Events</h1>
+        <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
+          <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm" >
+          <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="image-row">
@@ -91,7 +102,7 @@
           <img src="{{event.image }}" alt="Image 2">
           <div class="event-info">
             <h3 class="event-title-HOME">{{event.name }}</h3>
-            <p class="event-description-HOME">{{event.description}}</p>
+            <p class="event-description-HOME">{{event.sport}}</p>
             <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
             {% if event.status == 'SOLD OUT' %}
             <div class="status-box-Soldout">

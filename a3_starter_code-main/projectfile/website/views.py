@@ -12,13 +12,10 @@ def index():
 
 @mainbp.route('/filter')
 def filter():
-    form = FilterForm();
-    if form.validate_on_submit():
-        choice = form.data
-        events = db.session.scalars(db.select(Event).where(Event.sport == choice)).all()    
-        return render_template('index.html', events=events)
-    else:
-        return redirect(url_for('main.index'))
+    choice = request.args.get('choice')
+    events = db.session.scalars(db.select(Event).where(Event.sport.like(choice))).all()    
+    return render_template('index.html', events=events)
+
 
 
 

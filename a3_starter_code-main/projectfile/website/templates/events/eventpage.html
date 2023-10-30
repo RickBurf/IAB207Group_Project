@@ -153,11 +153,11 @@
     </div>
     <div class="row justify-content-center">
 
-            <div class="col-md-9">
+            <div class="col-md-5">
             {{ render_form(comment_form, "/events/{0}/comment".format(event.id)) }}
             {% for comment in event.comments %}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{comment.created_at.date()}}</span></b>
                 <p>{{ comment.text }}</p>
             </div>

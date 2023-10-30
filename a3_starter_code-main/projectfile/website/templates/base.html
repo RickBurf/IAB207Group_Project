@@ -51,6 +51,11 @@
                   <a class="nav-link" href="{{ url_for('event.history') }}">Booking History</a>
                 </li>
               </ul>
+              <li class="nav-item">
+              <form class="form d-flex" action="{{url_for('main.search')}}">
+                <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm" placeholder="Search Events">
+              </form>
+              </li>
               <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">

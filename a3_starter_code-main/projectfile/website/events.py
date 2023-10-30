@@ -39,7 +39,14 @@ def update(id):
         event.standard_price = form.Standard_price.data
         event.number_tickets += form.Number_Tickets.data
         event.user_id = current_user.id
+        if form.Start_Date.data < datetime.now().date():
+            event.status = "INACTIVE"
+        elif form.Start_Date.data == datetime.now().date():
+            if form.Start_Time.data < datetime.now().time():
+                event.status = "INACTIVE"
+        else: event.status = "OPEN"
         db.session.commit()
+
         flash('Successfully updated event', 'success')
         return redirect(url_for('event.show', id=id))
     return render_template('events/update.html', form=form)

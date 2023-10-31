@@ -74,9 +74,9 @@ def create():
             venue_address=form.Venue_Address.data,
             venue_name=form.Venue_Name.data,
             start_date=form.Start_Date.data,
-            end_date=form.End_Date.data,
+        
             start_time=form.Start_Time.data,
-            end_time=form.End_Time.data,
+            duration = form.Duration.data,
             sport=form.Sport.data,
             #status=form.Status.data,
             premium_price = form.Premium_price.data,

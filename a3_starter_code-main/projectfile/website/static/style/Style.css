@@ -81,14 +81,14 @@ a {
 
 .slideshow-container {
   padding-top: 10px;
-  max-width: 95%;
+  min-width: 100%;
   position: relative;
   margin-bottom: -5%;
 }
 
 .slideshow-image {
+  height: 1600px;
   width: 100%;
-  height: 400px;
   object-fit: cover;
 }
 
@@ -136,10 +136,10 @@ a {
 }
 
 .dot {
+  margin-bottom: 30px;
   cursor: pointer;
   height: 15px;
   width: 15px;
-  margin: 0 2px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -157,13 +157,13 @@ a {
 }
 
 .Chosen_Event_Image_Container img {
+  height: 400px;
   margin: 0 auto;
   display: block;
   margin-top: 10px;
   padding-top: 5px;
   border-radius: 10px;
   max-width: 100%;
-  height: auto;
 }
   
   
@@ -317,6 +317,7 @@ a {
 
 .Events_For_You {
   font-size: large;
+  color: grey;
   margin-top: 40px;
   padding-top: 20px;
   padding-right: 50px;
@@ -544,6 +545,7 @@ margin-bottom: 20px;
 }
 
 .image-row img {
+  max-height: 400px;
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -553,7 +555,9 @@ margin-bottom: 20px;
   .image-row .row .col-md-4 {
     padding-top: 10px;
     padding-bottom: 10px;
-    min-width: 420px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: 470px; /* Set a minimum width for the event cards */
   }
 
 .event-card-HOME {
@@ -992,5 +996,6 @@ object-fit: cover;
   border: 0;
   border-top: 2px solid #333; 
 }
+
 
 

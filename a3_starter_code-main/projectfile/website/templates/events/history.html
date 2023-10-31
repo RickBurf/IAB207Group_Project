@@ -5,61 +5,63 @@
 {% endblock %}
 
 {% block content%}
-<div class="row">
-  <div class="Events_4U">
-      <div class="col-md-12">
-        <h1>Booking History </h1>
-      </div>
-    </div>  
+<div class="content">
+  <div class="row">
+    <div class="Events_4U">
+        <div class="col-md-12">
+          <h1>Booking History </h1>
+        </div>
+      </div>  
 
 
-    <div class="Past-Image-Container">
-      <div class="col-md-12">
-        <div class="row">
-          {% for booking in bookings %}
-          <div class="col-md-3">
-            {% if booking.event %}
-            <div class="event-card2">
-              <a href="{{ url_for('event.show', id=booking.event.id) }}">
-                <img src= "{{ booking.event.image }}" class="bookinghistoryimage" alt="Image 1">
-                <div class="sevent-info">
-                  <h3 class="sevent-title">{{ booking.event.name }}</h3>
-                  <p class="sevent-description">{{ booking.event.description }}</p>
-                  <p class="sevent-date-HOME">{{ booking.booked_at }} </p>
-                  <div class="Event-Ticketing">
-                    <h3 class="event-date-HOME-TIX">Booking ID: {{ booking.booking_id }}</h3>
-                    <p class="event-date-HOME-TIX">Number of Premium Seats: {{ booking.premium_count}}</p>
-                    <p class="event-date-HOME-TIX">Number of Standard Seats: {{ booking.standard_count }} </p>
-                    <p class="event-date-HOME-TIX">Total Price: ${{ booking.total_price }} </p>
-                    <p class="event-date-HOME-TIX">Event Booked on {{ booking.booked_at }}</p>
+      <div class="Past-Image-Container">
+        <div class="col-md-12">
+          <div class="row">
+            {% for booking in bookings %}
+            <div class="col-md-3">
+              {% if booking.event %}
+              <div class="event-card2">
+                <a href="{{ url_for('event.show', id=booking.event.id) }}">
+                  <img src= "{{ booking.event.image }}" class="bookinghistoryimage" alt="Image 1">
+                  <div class="sevent-info">
+                    <h3 class="sevent-title">{{ booking.event.name }}</h3>
+                    <p class="sevent-description">{{ booking.event.description }}</p>
+                    <p class="sevent-date-HOME">{{ booking.booked_at }} </p>
+                    <div class="Event-Ticketing">
+                      <h3 class="event-date-HOME-TIX">Booking ID: {{ booking.booking_id }}</h3>
+                      <p class="event-date-HOME-TIX">Number of Premium Seats: {{ booking.premium_count}}</p>
+                      <p class="event-date-HOME-TIX">Number of Standard Seats: {{ booking.standard_count }} </p>
+                      <p class="event-date-HOME-TIX">Total Price: ${{ booking.total_price }} </p>
+                      <p class="event-date-HOME-TIX">Event Booked on {{ booking.booked_at }}</p>
+                    </div>
+                    <div class="ticket-section">
+                      {% if booking.event.status == 'SOLD OUT' %}
+                  <div class="status-box-Soldout">
+                    {{booking.event.status}}
                   </div>
-                  <div class="ticket-section">
-                    {% if booking.event.status == 'SOLD OUT' %}
-                <div class="status-box-Soldout">
-                  {{booking.event.status}}
-                </div>
-                {% elif booking.event.status == 'OPEN' %}
-                <div class="status-box">
-                  {{booking.event.status}}
-                </div>
-                {% elif booking.event.status == 'INACTIVE' %}
-                <div class="status-box-Inactive">
-                  {{booking.event.status}}
-                </div>
-                {%endif%}
+                  {% elif booking.event.status == 'OPEN' %}
+                  <div class="status-box">
+                    {{booking.event.status}}
                   </div>
-                </div>
-              </a>
+                  {% elif booking.event.status == 'INACTIVE' %}
+                  <div class="status-box-Inactive">
+                    {{booking.event.status}}
+                  </div>
+                  {%endif%}
+                    </div>
+                  </div>
+                </a>
+              </div>
+              {% endif %}
             </div>
+            {% if loop.index % 4 == 0 %}
+          </div><div class="col-md-12"><div class="row">
             {% endif %}
+            {% endfor %}
           </div>
-          {% if loop.index % 4 == 0 %}
-        </div><div class="col-md-12"><div class="row">
-          {% endif %}
-          {% endfor %}
         </div>
       </div>
-    </div>
+  </div>
 </div>
  
 

@@ -9,16 +9,22 @@
   <div class="image-row">
     <div class="row">
       {% if events %}
+      <div class="image-row">
+        <div class="row">
           {% for event in events %}
           <div class="col-md-4">
             <div class="event-card-HOME">
               <a href="{{ url_for('event.show', id=event.id) }}">
                 <img src="{{event.image }}" alt="Image 2">
                 <div class="event-info">
-                  <h3 class="event-title-HOME">{{event.name }}</h3>
-                  <p class="event-description-HOME">{{event.description}}</p>
+                  <h3 class="event-title-HOME">{{event.name}}</h3>
+                  <p class="event-description-HOME">{{event.sport}}</p>
                   <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
-                  {% if event.status == 'SOLD OUT' %}
+                  {% if event.status == 'SOLD OUT'%}
+                  <div class="status-box-Soldout">
+                    {{event.status}}
+                  </div>
+                  {% elif event.status == 'CANCELLED'%}
                   <div class="status-box-Soldout">
                     {{event.status}}
                   </div>
@@ -36,6 +42,8 @@
             </div>
           </div>
           {% endfor %}
+        </div>
+      </div>
       {% else %}
           <p>You have not created any events yet</p>
           <a href="{{ url_for('event.create') }}">

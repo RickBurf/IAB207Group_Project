@@ -87,8 +87,8 @@ a {
 }
 
 .slideshow-image {
-  height: 1600px;
   width: 100%;
+  height: 300px; /* Adjust the height as needed */
   object-fit: cover;
 }
 
@@ -328,7 +328,7 @@ a {
 }
 
 .image-row {
-  display: flex;
+  display: inline;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0; 
@@ -557,7 +557,7 @@ margin-bottom: 20px;
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    min-width: 470px; /* Set a minimum width for the event cards */
+    min-width: 350px; /* Set a minimum width for the event cards */
   }
 
 .event-card-HOME {

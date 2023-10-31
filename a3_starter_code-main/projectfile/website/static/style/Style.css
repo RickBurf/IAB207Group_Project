@@ -934,7 +934,7 @@ object-fit: cover;
 
 .status-box-Soldout {
   padding: 5px 10px;
-  background-color: #ff3d00;
+  background-color: red;
   color: white;
   border-radius: 5px;
   display: inline-block;

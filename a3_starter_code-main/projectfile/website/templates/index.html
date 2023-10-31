@@ -92,7 +92,11 @@
             <h3 class="event-title-HOME">{{event.name }}</h3>
             <p class="event-description-HOME">{{event.sport}}</p>
             <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
-            {% if event.status == 'SOLD OUT' %}
+            {% if event.status == 'SOLD OUT'%}
+            <div class="status-box-Soldout">
+              {{event.status}}
+            </div>
+            {% elif event.status == 'CANCELLED'%}
             <div class="status-box-Soldout">
               {{event.status}}
             </div>

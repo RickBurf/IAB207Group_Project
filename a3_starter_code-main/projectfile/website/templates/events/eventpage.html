@@ -39,6 +39,10 @@
                 <div class="status-box-Soldout">
                     {{event.status}}
                 </div>
+                {% elif event.status == 'CANCELLED'%}
+                <div class="status-box-Soldout">
+                  {{event.status}}
+                </div>
                 {% elif event.status == 'OPEN' %}
                 <div class="status-box">
                     {{event.status}}
@@ -119,11 +123,17 @@
     
 
     {% if event.user_id == current_user.id %}
+    
     <div class="row justify-content-center">
     <div class="col-md-6" style="text-align:center">
         <div class="button">
             <a class="nav-link" href="{{ url_for('event.update', id=event.id) }}"> Update Event</a>
         </div>
+        {% if event.status!='CANCELLED' %}
+        <div class="button" style ="background-color: red;">
+            <a class="nav-link" href="{{ url_for('event.cancel', id=event.id) }}"> Cancel Event</a>
+        </div>
+        {% endif %}
     </div>
 </div>
     {% endif %}

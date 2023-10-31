@@ -51,6 +51,14 @@ def update(id):
         return redirect(url_for('event.show', id=id))
     return render_template('events/update.html', form=form)
 
+@eventbp.route('/<id>/cancel', methods=['GET', 'POST'])
+def cancel(id):
+    print('Method type: ', request.method)
+    event = Event.query.get(id)
+    event.status = "CANCELLED"
+    db.session.commit()
+    return redirect(url_for('event.show', id=id))
+
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():

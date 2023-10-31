@@ -5,37 +5,44 @@
 {% endblock %}
 
 {% block content%}
-<div class="image-row">
-  <div class="row">
-    {% for event in events %}
-    <div class="col-md-4">
-      <div class="event-card-HOME">
-        <a href="{{ url_for('event.show', id=event.id) }}">
-          <img src="{{event.image }}" alt="Image 2">
-          <div class="event-info">
-            <h3 class="event-title-HOME">{{event.name }}</h3>
-            <p class="event-description-HOME">{{event.description}}</p>
-            <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
-            {% if event.status == 'SOLD OUT' %}
-            <div class="status-box-Soldout">
-              {{event.status}}
+<div class="content">
+  <div class="image-row">
+    <div class="row">
+      {% if events %}
+          {% for event in events %}
+          <div class="col-md-4">
+            <div class="event-card-HOME">
+              <a href="{{ url_for('event.show', id=event.id) }}">
+                <img src="{{event.image }}" alt="Image 2">
+                <div class="event-info">
+                  <h3 class="event-title-HOME">{{event.name }}</h3>
+                  <p class="event-description-HOME">{{event.description}}</p>
+                  <p class="event-date-HOME">{{event.start_time}} {{event.start_date}}</p>
+                  {% if event.status == 'SOLD OUT' %}
+                  <div class="status-box-Soldout">
+                    {{event.status}}
+                  </div>
+                  {% elif event.status == 'OPEN' %}
+                  <div class="status-box">
+                    {{event.status}}
+                  </div>
+                  {% elif event.status == 'INACTIVE' %}
+                  <div class="status-box-Inactive">
+                    {{event.status}}
+                  </div>
+                  {% endif %}
+                </div>
+              </a>
             </div>
-            {% elif event.status == 'OPEN' %}
-            <div class="status-box">
-              {{event.status}}
-            </div>
-            {% elif event.status == 'INACTIVE' %}
-            <div class="status-box-Inactive">
-              {{event.status}}
-            </div>
-            {%endif%}
           </div>
-        </a>
-      </div>
+          {% endfor %}
+      {% else %}
+          <p>You have not created any events yet</p>
+          <a href="{{ url_for('event.create') }}">
+            <button class="Create_Event_Button"> Create your first event</button>
+          </a>
+      {% endif %}
     </div>
-    {% endfor %}
   </div>
 </div>
- 
-
 {% endblock %}
